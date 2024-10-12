@@ -1,7 +1,6 @@
 #pragma once
 
 #include "utils.h"
-#include "cuda_utils.h"
 #include "constants.h"
 #include "candidate.h"
 

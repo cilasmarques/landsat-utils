@@ -1,5 +1,4 @@
 #include "products.h"
-#include "kernels.h"
 
 Products::Products() {}
 
