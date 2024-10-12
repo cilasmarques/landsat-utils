@@ -53,8 +53,8 @@ int main(int argc, char *argv[])
       method = flag[6] - '0';
   }
 
-  int WIDTH = 120;
-  int HEIGHT = 120;
+  int WIDTH = 1688;
+  int HEIGHT = 1279;
 
   // =====  START + TIME OUTPUT =====
   MTL mtl = MTL(path_meta_file);
@@ -68,6 +68,9 @@ int main(int argc, char *argv[])
   std::cout << "HOT_LINE: " << landsat.hot_pixel.line << std::endl;
   std::cout << "COLD_COL: " << landsat.cold_pixel.col << std::endl;
   std::cout << "COLD_LINE: " << landsat.cold_pixel.line << std::endl;
+  std::cout << "HEIGHT: " << landsat.height_band << std::endl;
+  std::cout << "WIDTH: " << landsat.width_band << std::endl;
+
 
   float *band_blue;
   float *band_green;
@@ -78,10 +81,10 @@ int main(int argc, char *argv[])
   float *band_swir2;
   float *elevation;
 
-  int initial_line = landsat.cold_pixel.line;   // 43
-  int final_line = initial_line + WIDTH;        // 193
+  int initial_line = landsat.hot_pixel.line;
+  int final_line = initial_line + WIDTH;
 
-  int initial_col = landsat.cold_pixel.col;
+  int initial_col = landsat.hot_pixel.col;
   int final_col = initial_col + HEIGHT;
 
   band_blue = (float *)malloc(HEIGHT * WIDTH * sizeof(float));
