@@ -28,8 +28,8 @@ clean-all:
 clean-images:
 	rm -rf $(IMAGES_DIR)/*
 
-build-cpp:
-	g++ -I./include -g ./src/cpp/*.cpp -o ./src/main -std=c++14 -ltiff
+build-crop:
+	g++ -I./include -g ./crop/*.cpp -o ./crop/main -std=c++14 -ltiff
 
 docker-landsat-download:
 	docker run \
@@ -49,18 +49,10 @@ docker-landsat-preprocess:
 		-e DATE=$(IMAGE_DATE) \
 		cilasmarques/landsat-preprocess:latest
 
-exec-landsat8:
-	./src/main \
+exec-crop:
+	./crop/main \
 		$(INPUT_DATA_PATH)/B2.TIF $(INPUT_DATA_PATH)/B3.TIF $(INPUT_DATA_PATH)/B4.TIF \
 		$(INPUT_DATA_PATH)/B5.TIF $(INPUT_DATA_PATH)/B6.TIF $(INPUT_DATA_PATH)/B10.TIF \
 		$(INPUT_DATA_PATH)/B7.TIF $(INPUT_DATA_PATH)/elevation.tif $(INPUT_DATA_PATH)/MTL.txt \
 		$(INPUT_DATA_PATH)/station.csv $(OUTPUT_DATA_PATH) \
 		-meth=$(METHOD) -threads=$(THREADS) & 
-
-exec-landsat5-7:
-	./src/main \
-		$(INPUT_DATA_PATH)/B1.TIF $(INPUT_DATA_PATH)/B2.TIF $(INPUT_DATA_PATH)/B3.TIF \
-		$(INPUT_DATA_PATH)/B4.TIF $(INPUT_DATA_PATH)/B5.TIF $(INPUT_DATA_PATH)/B6.TIF \
-		$(INPUT_DATA_PATH)/B7.TIF $(INPUT_DATA_PATH)/elevation.tif $(INPUT_DATA_PATH)/MTL.txt \
-		$(INPUT_DATA_PATH)/station.csv $(OUTPUT_DATA_PATH) \
-		-meth=$(METHOD) -threads=$(THREADS) &
