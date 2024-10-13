@@ -137,18 +137,9 @@ string Landsat::select_endmembers(int method, int height_limit, int width_limit)
   begin = system_clock::now();
   initial_time = duration_cast<nanoseconds>(system_clock::now().time_since_epoch()).count();
 
-  if (method == 0)
-  { // STEEP
-    pair<Candidate, Candidate> pixels = getEndmembersSTEPP(products.ndvi, products.surface_temperature, products.albedo, products.net_radiation, products.soil_heat, height_band, width_band, height_limit, width_limit);
-    hot_pixel = pixels.first;
-    cold_pixel = pixels.second;
-  }
-  else if (method == 1)
-  { // ASEBAL
-    pair<Candidate, Candidate> pixels = getEndmembersASEBAL(products.ndvi, products.surface_temperature, products.albedo, products.net_radiation, products.soil_heat, height_band, width_band, height_limit, width_limit);
-    hot_pixel = pixels.first;
-    cold_pixel = pixels.second;
-  }
+  pair<Candidate, Candidate> pixels = getEndmembers(products.ndvi, products.surface_temperature, products.albedo, products.net_radiation, products.soil_heat, height_band, width_band, height_limit, width_limit);
+  hot_pixel = pixels.first;
+  cold_pixel = pixels.second;
 
   end = system_clock::now();
   general_time = duration_cast<nanoseconds>(end - begin).count();

@@ -32,7 +32,7 @@ void get_quartiles(float *target, float *v_quartile, int height_band, int width_
  *
  * @retval Candidate
  */
-pair<Candidate, Candidate> getEndmembersSTEPP(float *ndvi, float *surface_temperature, float *albedo, float *net_radiation, float *soil_heat, int height_band, int width_band, int height_limit, int width_limit);
+pair<Candidate, Candidate> getEndmembers(float *ndvi, float *surface_temperature, float *albedo, float *net_radiation, float *soil_heat, int height_band, int width_band, int height_limit, int width_limit);
 
 /**
  * @brief Get the hot and cold pixels based on the ASEBAL algorithm.
@@ -47,4 +47,4 @@ pair<Candidate, Candidate> getEndmembersSTEPP(float *ndvi, float *surface_temper
  *
  * @retval Candidate
  */
-pair<Candidate, Candidate> getEndmembersASEBAL(float *ndvi, float *surface_temperature, float *albedo, float *net_radiation, float *soil_heat, int height_band, int width_band, int height_limit, int width_limit);
+pair<Candidate, Candidate> endmembersSeconfFilter(float *ndvi, float *surface_temperature, float *albedo, float *net_radiation, float *soil_heat, int height_band, int width_band, int height_limit, int width_limit);

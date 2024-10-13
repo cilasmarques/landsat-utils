@@ -71,7 +71,6 @@ int main(int argc, char *argv[])
   std::cout << "HEIGHT: " << landsat.height_band << std::endl;
   std::cout << "WIDTH: " << landsat.width_band << std::endl;
 
-
   float *band_blue;
   float *band_green;
   float *band_red;
@@ -81,10 +80,10 @@ int main(int argc, char *argv[])
   float *band_swir2;
   float *elevation;
 
-  int initial_line = landsat.hot_pixel.line;
+  int initial_line = landsat.cold_pixel.line;
   int final_line = initial_line + WIDTH;
 
-  int initial_col = landsat.hot_pixel.col;
+  int initial_col = landsat.cold_pixel.col;
   int final_col = initial_col + HEIGHT;
 
   band_blue = (float *)malloc(HEIGHT * WIDTH * sizeof(float));
