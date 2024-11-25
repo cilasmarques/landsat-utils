@@ -6,10 +6,10 @@
 #include "constants.h"
 #include "parameters.h"
 
-/** 
+/**
  * @brief Main function
  * This function is responsible for reading the input parameters and calling the Landsat class to process the products.
- * 
+ *
  * @param argc Number of input parameters
  * @param argv Input parameters
  *              - INPUT_BAND_BLUE_INDEX         = 1;
@@ -25,15 +25,15 @@
  *              - INPUT_LAND_COVER_INDEX        = 11;
  *              - OUTPUT_FOLDER                 = 12;
  * @return int
-*/
+ */
 int main(int argc, char *argv[])
 {
-  int INPUT_BAND_ELEV_INDEX    = 8;
-  int INPUT_MTL_DATA_INDEX     = 9;
+  int INPUT_BAND_ELEV_INDEX = 8;
+  int INPUT_MTL_DATA_INDEX = 9;
   int INPUT_STATION_DATA_INDEX = 10;
-  int OUTPUT_FOLDER            = 11;
-  int METHOD_INDEX             = 12;
-  int THREADS_INDEX            = 13;
+  int OUTPUT_FOLDER = 11;
+  int METHOD_INDEX = 12;
+  int THREADS_INDEX = 13;
 
   // Load the meteorologic stations data
   string path_meta_file = argv[INPUT_MTL_DATA_INDEX];
@@ -41,20 +41,22 @@ int main(int argc, char *argv[])
 
   // Load the landsat images bands
   string bands_paths[INPUT_BAND_ELEV_INDEX];
-  for (int i = 0; i < INPUT_BAND_ELEV_INDEX; i++) {
-    bands_paths[i] = argv[i+1];
+  for (int i = 0; i < INPUT_BAND_ELEV_INDEX; i++)
+  {
+    bands_paths[i] = argv[i + 1];
   }
 
-  // Load the SEB model (SEBAL or STEEP) 
+  // Load the SEB model (SEBAL or STEEP)
   int method = 0;
-  if(argc >= METHOD_INDEX){
+  if (argc >= METHOD_INDEX)
+  {
     string flag = argv[METHOD_INDEX];
-    if(flag.substr(0, 6) == "-meth=")
+    if (flag.substr(0, 6) == "-meth=")
       method = flag[6] - '0';
   }
 
-  int WIDTH = 1688;
-  int HEIGHT = 1279;
+  int WIDTH = (7295 / 2);
+  int HEIGHT = (6502 / 2);
 
   // =====  START + TIME OUTPUT =====
   MTL mtl = MTL(path_meta_file);
@@ -68,8 +70,10 @@ int main(int argc, char *argv[])
   std::cout << "HOT_LINE: " << landsat.hot_pixel.line << std::endl;
   std::cout << "COLD_COL: " << landsat.cold_pixel.col << std::endl;
   std::cout << "COLD_LINE: " << landsat.cold_pixel.line << std::endl;
-  std::cout << "HEIGHT: " << landsat.height_band << std::endl;
-  std::cout << "WIDTH: " << landsat.width_band << std::endl;
+  std::cout << "HEIGHT_ORIGINAL: " << landsat.height_band << std::endl;
+  std::cout << "WIDTH_ORIGINAL: " << landsat.width_band << std::endl;
+  std::cout << "HEIGHT_CROP: " << HEIGHT << std::endl;
+  std::cout << "WIDTH_CROP: " << WIDTH << std::endl;
 
   float *band_blue;
   float *band_green;
@@ -80,12 +84,6 @@ int main(int argc, char *argv[])
   float *band_swir2;
   float *elevation;
 
-  int initial_line = landsat.cold_pixel.line;
-  int final_line = initial_line + WIDTH;
-
-  int initial_col = landsat.cold_pixel.col;
-  int final_col = initial_col + HEIGHT;
-
   band_blue = (float *)malloc(HEIGHT * WIDTH * sizeof(float));
   band_green = (float *)malloc(HEIGHT * WIDTH * sizeof(float));
   band_red = (float *)malloc(HEIGHT * WIDTH * sizeof(float));
@@ -95,16 +93,24 @@ int main(int argc, char *argv[])
   band_swir2 = (float *)malloc(HEIGHT * WIDTH * sizeof(float));
   elevation = (float *)malloc(HEIGHT * WIDTH * sizeof(float));
 
-  for (int i = initial_line; i < final_line; i++) {
-    for (int j = initial_col; j < final_col; j++) {
-      band_blue[(i - initial_line) * WIDTH + (j - initial_col)] = landsat.products.band_blue[i * landsat.width_band + j];
-      band_green[(i - initial_line) * WIDTH + (j - initial_col)] = landsat.products.band_green[i * landsat.width_band + j];
-      band_red[(i - initial_line) * WIDTH + (j - initial_col)] = landsat.products.band_red[i * landsat.width_band + j];
-      band_nir[(i - initial_line) * WIDTH + (j - initial_col)] = landsat.products.band_nir[i * landsat.width_band + j];
-      band_swir1[(i - initial_line) * WIDTH + (j - initial_col)] = landsat.products.band_swir1[i * landsat.width_band + j];
-      band_termal[(i - initial_line) * WIDTH + (j - initial_col)] = landsat.products.band_termal[i * landsat.width_band + j];
-      band_swir2[(i - initial_line) * WIDTH + (j - initial_col)] = landsat.products.band_swir2[i * landsat.width_band + j];
-      elevation[(i - initial_line) * WIDTH + (j - initial_col)] = landsat.products.elevation[i * landsat.width_band + j];
+  int initial_line = landsat.cold_pixel.line;
+  int final_line = initial_line + WIDTH;
+
+  int initial_col = landsat.cold_pixel.col;
+  int final_col = initial_col + HEIGHT;
+
+  for (int i = 0; i < HEIGHT; i++)
+  {
+    for (int j = 0; j < WIDTH; j++)
+    {
+      band_blue[i * WIDTH + j] = landsat.products.band_blue[(i + initial_line) * landsat.width_band + (j + initial_col)];
+      band_green[i * WIDTH + j] = landsat.products.band_green[(i + initial_line) * landsat.width_band + (j + initial_col)];
+      band_red[i * WIDTH + j] = landsat.products.band_red[(i + initial_line) * landsat.width_band + (j + initial_col)];
+      band_nir[i * WIDTH + j] = landsat.products.band_nir[(i + initial_line) * landsat.width_band + (j + initial_col)];
+      band_swir1[i * WIDTH + j] = landsat.products.band_swir1[(i + initial_line) * landsat.width_band + (j + initial_col)];
+      band_termal[i * WIDTH + j] = landsat.products.band_termal[(i + initial_line) * landsat.width_band + (j + initial_col)];
+      band_swir2[i * WIDTH + j] = landsat.products.band_swir2[(i + initial_line) * landsat.width_band + (j + initial_col)];
+      elevation[i * WIDTH + j] = landsat.products.elevation[(i + initial_line) * landsat.width_band + (j + initial_col)];
     }
   }
 
