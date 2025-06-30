@@ -15,7 +15,6 @@ IMAGE_DATE="2017-05-11"
 
 ## ==== Execution
 METHOD=0
-THREADS=1024
 OUTPUT_DATA_PATH=./output
 INPUT_DATA_PATH=$(IMAGES_DIR)/$(IMAGE_LANDSAT)_$(IMAGE_PATHROW)_$(IMAGE_DATE)/final_results
 
@@ -55,7 +54,7 @@ exec-crop-8:
 		$(INPUT_DATA_PATH)/B5.TIF $(INPUT_DATA_PATH)/B6.TIF $(INPUT_DATA_PATH)/B10.TIF \
 		$(INPUT_DATA_PATH)/B7.TIF $(INPUT_DATA_PATH)/elevation.tif $(INPUT_DATA_PATH)/MTL.txt \
 		$(INPUT_DATA_PATH)/station.csv $(OUTPUT_DATA_PATH) \
-		-meth=$(METHOD) -threads=$(THREADS) & 
+		-meth=$(METHOD) & 
 
 exec-crop-57:
 	./crop/main \
@@ -63,4 +62,4 @@ exec-crop-57:
 		$(INPUT_DATA_PATH)/B5.TIF $(INPUT_DATA_PATH)/B.TIF \
 		$(INPUT_DATA_PATH)/B7.TIF $(INPUT_DATA_PATH)/elevation.tif $(INPUT_DATA_PATH)/MTL.txt \
 		$(INPUT_DATA_PATH)/station.csv $(OUTPUT_DATA_PATH) \
-		-meth=$(METHOD) -threads=$(THREADS) & 
+		-meth=$(METHOD) & 

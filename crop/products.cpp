@@ -2,9 +2,8 @@
 
 Products::Products() {}
 
-Products::Products(uint32_t width_band, uint32_t height_band, int threads_num)
+Products::Products(uint32_t width_band, uint32_t height_band)
 {
-  this->threads_num = threads_num;
   this->width_band = width_band;
   this->height_band = height_band;
   this->nBytes_band = height_band * width_band * sizeof(float);

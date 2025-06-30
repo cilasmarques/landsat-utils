@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
   int INPUT_STATION_DATA_INDEX = 10;
   int OUTPUT_FOLDER = 11;
   int METHOD_INDEX = 12;
-  int THREADS_INDEX = 13;
 
   // Load the meteorologic stations data
   string path_meta_file = argv[INPUT_MTL_DATA_INDEX];
@@ -61,7 +60,7 @@ int main(int argc, char *argv[])
   // =====  START + TIME OUTPUT =====
   MTL mtl = MTL(path_meta_file);
   Station station = Station(station_data_path, mtl.image_hour);
-  Landsat landsat = Landsat(bands_paths, mtl, 1); // serial implementation
+  Landsat landsat = Landsat(bands_paths, mtl); // serial implementation
 
   landsat.compute_Rn_G(station);
   landsat.select_endmembers(method, HEIGHT, WIDTH);

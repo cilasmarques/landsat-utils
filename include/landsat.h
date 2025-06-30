@@ -30,7 +30,7 @@ struct Landsat
    * @param  tal_path: Path to the TAL file.
    * @param  land_cover_path: Path to the land cover file.
    */
-  Landsat(string bands_paths[], MTL mtl, int threads_num);
+  Landsat(string bands_paths[], MTL mtl);
 
   /**
    * @brief  Destructor.

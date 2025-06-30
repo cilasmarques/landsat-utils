@@ -10,9 +10,6 @@
  */
 struct Products
 {
-  int threads_num = 1;
-  int blocks_num;
-
   int nBytes_band;
   uint32_t width_band;
   uint32_t height_band;
@@ -75,7 +72,7 @@ struct Products
    * @param  width_band: Band width.
    * @param  height_band: Band height.
    */
-  Products(uint32_t width_band, uint32_t height_band, int threads_num);
+  Products(uint32_t width_band, uint32_t height_band);
 
   /**
    * @brief  Destructor.
