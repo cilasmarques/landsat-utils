@@ -2,6 +2,17 @@
 
 A C++ application for processing and analyzing Landsat satellite imagery data. This project provides tools for downloading, preprocessing, and performing surface energy balance calculations on Landsat satellite images.
 
+## Project Structure
+
+```
+landsat-utils/
+├── crop/           # C++ application for Landsat processing
+├── eval/           # Python scripts for TIFF comparison and evaluation
+├── include/        # Header files
+├── input/          # Input data directory
+├── output/         # Output data directory
+```
+
 ## Prerequisites
 
 ### System Requirements
@@ -10,6 +21,7 @@ A C++ application for processing and analyzing Landsat satellite imagery data. T
 - GDAL (Geospatial Data Abstraction Library)
 - libtiff development library
 - C++14 compatible compiler (g++)
+- Python 3.7+ (for evaluation scripts)
 
 ### Installation
 
@@ -28,6 +40,16 @@ A C++ application for processing and analyzing Landsat satellite imagery data. T
    ```bash
    sudo apt-get install libtiff5-dev
    ```
+
+4. **Install Python dependencies (for evaluation)**
+   ```bash
+   cd eval
+   pip3 install -r requirements.txt
+   ```
+
+---
+
+# Crop Module - Landsat Processing
 
 ## Usage
 
@@ -122,6 +144,86 @@ The application outputs **cropped spectral bands** from the original Landsat ima
 - **Coordinate system**: Preserved from original Landsat data
 
 All outputs are saved in the `output/` directory specified in the Makefile.
+
+---
+
+# Eval Module - TIFF Comparison and Evaluation
+
+## Overview
+
+The evaluation module compares TIFF files and generates similarity tables with different precision levels. It compares kernel files with their corresponding serial baseline files.
+
+## Features
+
+- Compares kernel files with their corresponding serial baseline files
+- Generates 6 CSV tables with different precision levels:
+  - **FLOOR (ignores decimal places)**: 3 files (0.1, 1.0, 5.0)
+  - **ROUND (2 decimal places)**: 3 files (0.1, 1.0, 5.0)
+- Counts how many occurrences diverge at each precision level
+- Calculates the median of differences between corresponding pixels
+
+## File Comparisons
+
+The script compares the following file pairs:
+- `kernels-raw-0-evapotranspiration_24h.tif` ↔ `serial-0-evapotranspiration_24h.tif` (steep)
+- `kernels-raw-1-evapotranspiration_24h.tif` ↔ `serial-1-evapotranspiration_24h.tif` (sebal)
+- `kernels-streams-sync-0-evapotranspiration_24h.tif` ↔ `serial-0-evapotranspiration_24h.tif` (steep)
+- `kernels-streams-sync-1-evapotranspiration_24h.tif` ↔ `serial-1-evapotranspiration_24h.tif` (sebal)
+
+## How to Execute
+
+### 1. Install Dependencies
+
+```bash
+cd eval
+pip3 install -r requirements.txt
+```
+
+### 2. Run Comparison
+
+#### Option A: Automatic Script
+```bash
+./run_comparison.sh
+```
+
+#### Option B: Manual Execution
+```bash
+python3 compare_tiffs.py
+```
+
+#### Option C: With Custom Parameters
+```bash
+python3 compare_tiffs.py --tiffs_dir ../input --output_dir ./output
+```
+
+### 3. Available Parameters
+
+- `--tiffs_dir`: Directory with TIFF files 
+- `--output_dir`: Output directory for CSVs 
+
+## Output Files
+
+The script generates **6 CSV files**:
+
+### FLOOR (ignores decimal places):
+- `similaridade_floor_01_decimal.csv` - precision 0.1
+- `similaridade_floor_1_unidade.csv` - precision 1.0
+- `similaridade_floor_5_unidades.csv` - precision 5.0
+
+### ROUND (2 decimal places):
+- `similaridade_round_01_decimal.csv` - precision 0.1
+- `similaridade_round_1_unidade.csv` - precision 1.0
+- `similaridade_round_5_unidades.csv` - precision 5.0
+
+### CSV Columns:
+- `Arquivo_Kernel`: Kernel file name
+- `Arquivo_Serial`: Corresponding serial file name
+- `Pixels_Diferentes`: Number of pixels that diverge
+- `Similaridade_%`: Similarity percentage
+- `Total_Pixels`: Total pixels in the image
+- `Diferença_Mediana`: Median of absolute differences between pixels
+
+----
 
 ## Technical Details
 

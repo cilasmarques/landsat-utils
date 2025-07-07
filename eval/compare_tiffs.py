@@ -64,8 +64,8 @@ def compare_arrays(arr1, arr2, precision, method='round'):
 
 def main():
     parser = argparse.ArgumentParser(description='Compara arquivos TIFF e gera tabelas de similaridade')
-    parser.add_argument('--tiffs_dir', default='../tiffs', help='Diretório com os arquivos TIFF')
-    parser.add_argument('--output_dir', default='.', help='Diretório de saída para os CSVs')
+    parser.add_argument('--tiffs_dir', default='./input', help='Diretório com os arquivos TIFF')
+    parser.add_argument('--output_dir', default='./output', help='Diretório de saída para os CSVs')
     
     args = parser.parse_args()
     
