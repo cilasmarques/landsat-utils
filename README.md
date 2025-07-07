@@ -111,6 +111,15 @@ INPUT_DATA_PATH=./input/landsat_8_215065_2017-05-11/final_results
 | `clean-all` | Clean all output files and directories |
 | `clean-images` | Remove all downloaded images |
 
+### Evaluation Commands
+
+| Command | Description |
+|---------|-------------|
+| `install-eval-deps` | Install Python dependencies for evaluation |
+| `exec-eval` | Execute TIFF comparison and evaluation |
+| `exec-eval-custom` | Execute evaluation with custom parameters |
+| `clean-eval` | Clean evaluation CSV files |
+
 ## Output Products
 
 The application outputs **cropped spectral bands** from the original Landsat imagery. The cropping is performed around the cold pixel location identified during endmember selection.
@@ -183,7 +192,11 @@ pip3 install -r requirements.txt
 
 #### Option A: Automatic Script
 ```bash
-./run_comparison.sh
+# Install dependencies
+make install-eval-deps
+
+# Run evaluation
+make exec-eval
 ```
 
 #### Option B: Manual Execution
