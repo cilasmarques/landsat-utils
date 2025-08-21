@@ -19,8 +19,9 @@ OUTPUT_DATA_PATH=./output
 INPUT_DATA_PATH=$(IMAGES_DIR)/$(IMAGE_LANDSAT)_$(IMAGE_PATHROW)_$(IMAGE_DATE)/final_results
 
 ## ==== Evaluation
-EVAL_TIFFS_DIR=./input
-EVAL_OUTPUT_DIR=./output
+EVAL_TIFF_1=./input/serial-double-r-steep/evapotranspiration_24h.tif
+EVAL_TIFF_2=./input/kernels-float-r-steep/evapotranspiration_24h.tif
+EVAL_OUTPUT_DIR=./output/eval.txt
 
 clean:
 	rm $(OUTPUT_DATA_PATH)/*
@@ -70,14 +71,5 @@ exec-crop-57:
 
 ## ==== Evaluation commands
 
-install-eval-deps:
-	cd eval && pip3 install -r requirements.txt
-
 exec-eval:
-	cd eval && python3 compare_tiffs.py --tiffs_dir $(EVAL_TIFFS_DIR) --output_dir $(EVAL_OUTPUT_DIR)
-
-exec-eval-custom:
-	cd eval && python3 compare_tiffs.py --tiffs_dir $(EVAL_TIFFS_DIR) --output_dir $(EVAL_OUTPUT_DIR)
-
-clean-eval:
-	rm -f eval/*.csv
+	python eval/eval_tiffs_simple.py $(EVAL_TIFF_1) $(EVAL_TIFF_2) > $(EVAL_OUTPUT_DIR)

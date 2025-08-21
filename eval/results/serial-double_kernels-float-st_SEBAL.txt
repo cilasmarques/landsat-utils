@@ -1,0 +1,20 @@
+Pixel [4866,3768] - Imagem 1: 0.000000, Imagem 2: 0.000000
+Diferença absoluta: 0.000000
+
+Estatísticas das imagens:
+Imagem 1 - Min: 0.000000, Max: 1.000000, Média: 0.002290
+Imagem 2 - Min: 0.000000, Max: 1.000000, Média: 0.002204
+
+Primeiros 5 pixels com diferença > 0.001:
+Pixel [8,1248] - Imagem 1: 0.659000, Imagem 2: 0.604000, Diff: 0.055000
+Pixel [12,1287] - Imagem 1: 0.004000, Imagem 2: 0.008000, Diff: 0.004000
+Pixel [12,1289] - Imagem 1: 0.012000, Imagem 2: 0.008000, Diff: 0.004000
+Pixel [12,1290] - Imagem 1: 0.016000, Imagem 2: 0.012000, Diff: 0.004000
+Pixel [12,1292] - Imagem 1: 0.020000, Imagem 2: 0.016000, Diff: 0.004000
+Comparação considerando valores arredondados para 3 casas decimais
+SSIM (simplificado): 1.000000
+MAE: 0.000404
+MSE: 0.000023
+RMSE: 0.004826
+Correlação: 0.989859
+Diff. % média: 18.019425%
