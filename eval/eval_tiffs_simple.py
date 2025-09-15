@@ -71,7 +71,7 @@ def main():
                     return result
                 except:
                     # Se ImageMagick falhar, tentar abrir como array numpy
-                    import gdal
+                    from osgeo import gdal
                     dataset = gdal.Open(filepath)
                     if dataset is not None:
                         band = dataset.GetRasterBand(1)
