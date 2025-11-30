@@ -72,4 +72,4 @@ exec-crop-57:
 ## ==== Evaluation commands
 
 exec-eval:
-	python eval/eval_tiffs_simple.py $(EVAL_TIFF_1) $(EVAL_TIFF_2) > $(EVAL_OUTPUT_DIR)
+	python3 eval/eval_tiffs_simple.py $(EVAL_TIFF_1) $(EVAL_TIFF_2) > $(EVAL_OUTPUT_DIR)

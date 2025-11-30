@@ -16,5 +16,5 @@ SSIM (simplificado): 1.000000
 MAE: 0.000404
 MSE: 0.000023
 RMSE: 0.004826
-Correlação: 0.989859
-Diff. % média: 18.019425%
+Correlação: 0.989861
+Diff. % média: 18.017560%

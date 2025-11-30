@@ -4,18 +4,18 @@ Diferença percentual: 0.000000%
 
 Estatísticas das imagens:
 Imagem 1 - Min: 0.000000, Max: 1.000000, Média: 0.008295
-Imagem 2 - Min: 0.000000, Max: 1.000000, Média: 0.008815
+Imagem 2 - Min: 0.000000, Max: 1.000000, Média: 0.009226
 
 Primeiros 5 pixels com diferença > 0.001:
 Pixel [9,1248] - Imagem 1: 0.008000, Imagem 2: 0.012000, Diff: 0.004000
 Pixel [11,1249] - Imagem 1: 0.008000, Imagem 2: 0.012000, Diff: 0.004000
-Pixel [15,1234] - Imagem 1: 0.008000, Imagem 2: 0.012000, Diff: 0.004000
-Pixel [15,1235] - Imagem 1: 0.008000, Imagem 2: 0.012000, Diff: 0.004000
-Pixel [15,1257] - Imagem 1: 0.012000, Imagem 2: 0.008000, Diff: 0.004000
+Pixel [12,1247] - Imagem 1: 0.008000, Imagem 2: 0.012000, Diff: 0.004000
+Pixel [14,1256] - Imagem 1: 0.008000, Imagem 2: 0.012000, Diff: 0.004000
+Pixel [14,1257] - Imagem 1: 0.008000, Imagem 2: 0.012000, Diff: 0.004000
 Comparação considerando valores arredondados para 3 casas decimais
-SSIM (simplificado): 0.999992
-MAE: 0.001349
-MSE: 0.000488
-RMSE: 0.022096
-Correlação: 0.480058
-Diff. % média: 10.628724%
+SSIM (simplificado): 0.999995
+MAE: 0.001613
+MSE: 0.000303
+RMSE: 0.017416
+Correlação: 0.657734
+Diff. % média: 19.597747%
